@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package gRPC;
+
+service Fibonacci {
+    rpc getFibo(FibRequest) returns (FibResponse) {}
+}
+
+message FibRequest {
+    int32 number = 1;
+}
+
+message FibResponse {
+    int32 number = 1;
+}
