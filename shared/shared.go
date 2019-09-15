@@ -6,6 +6,7 @@ import (
 )
 
 const SAMPLE_SIZE = 10000
+const PORT = 7272
 
 func CheckError(err error) {
 	if err != nil {
