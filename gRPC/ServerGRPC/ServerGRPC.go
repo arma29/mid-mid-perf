@@ -7,6 +7,8 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"strconv"
+
+	"github.com/arma29/mid-mid-perf/gRPC/fibonacci"
 	"github.com/arma29/mid-mid-perf/application"
 	"github.com/arma29/mid-mid-perf/shared"
 )
@@ -14,7 +16,7 @@ import (
 type fibonacciServer struct{}
 
 func (s *fibonacciServer) GetFibo(ctx context.Context, req *fibonacci.FibRequest) (*fibonacci.FibResponse, error) {
-	return &fibonacci.FibResponse{ Number: application.calcFibonacci(req.Number) }, nil
+	return &fibonacci.FibResponse{ Number: application.CalcFibonacci(req.Number) }, nil
 }
 
 func main() {

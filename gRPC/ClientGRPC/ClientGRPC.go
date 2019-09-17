@@ -8,7 +8,7 @@ import (
 	"time"
 	"os"
 
-	"github.com/arma29/mid-mid-perf/application"
+	"github.com/arma29/mid-mid-perf/gRPC/fibonacci"
 	"github.com/arma29/mid-mid-perf/shared"
 )
 
