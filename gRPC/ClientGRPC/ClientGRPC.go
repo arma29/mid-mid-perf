@@ -38,7 +38,7 @@ func main() {
 	number, _ := strconv.Atoi(os.Args[2])
 
 	fmt.Println("Fibonacci,Answer,Time")
-	for i = 0; i < 2; i++ {
+	for i = 0; i < shared.SAMPLE_SIZE; i++ {
 		t1 := time.Now()
 
 		// Invoca operação remota
