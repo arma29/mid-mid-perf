@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-const SAMPLE_SIZE = 10000
+const SAMPLE_SIZE = 14000 // Warm-up: 30% , Post: 10%
 const GRPC_PORT = 7272
 const RABBITMQ_PORT = 5672
 

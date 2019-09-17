@@ -14,7 +14,7 @@ import (
 
 func main() {
 	// Get Argument from command Line
-	if len(os.Args) != 2 {
+	if len(os.Args) != 3 {
 		fmt.Printf("Missing arguments: %s number\n", os.Args[0])
 		os.Exit(1)
 	}
@@ -31,17 +31,24 @@ func main() {
 	fib := fibonacci.NewFibonacciClient(conn)
 
 	// Contacta o servidor
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 
+		time.Minute) // havia um problema com o time.Second . 1s -> 1m
 	defer cancel()
 
-	for i = 0; i < shared.SAMPLE_SIZE; i++ {
+	number, _ := strconv.Atoi(os.Args[2])
+
+	fmt.Println("Fibonacci,Answer,Time")
+	for i = 0; i < 2; i++ {
 		t1 := time.Now()
 
 		// Invoca operação remota
-		fib.GetFibo(ctx, &fibonacci.FibRequest{ Number: 5})
+		msgReply, err := fib.GetFibo(ctx, &fibonacci.FibRequest{ Number: int32(number)})
+		shared.CheckError(err)
 
 		t2 := time.Now()
 		x := float64(t2.Sub(t1).Nanoseconds()) / 1000000
-		fmt.Println(x)
+
+		s := fmt.Sprintf("%d,%d,%f", number, msgReply.Number, x) 
+		fmt.Println(s)
 	}
 }
