@@ -6,14 +6,24 @@ import (
 	"strconv"
 	"fmt"
 	"time"
+	"os"
+
 	"github.com/arma29/mid-mid-perf/application"
 	"github.com/arma29/mid-mid-perf/shared"
 )
 
 func main() {
+	// Get Argument from command Line
+	if len(os.Args) != 2 {
+		fmt.Printf("Missing arguments: %s number\n", os.Args[0])
+		os.Exit(1)
+	}
+
+	ipContainer := os.Args[1]
 	var i int32
 
-	conn, err := grpc.Dial(":"+strconv.Itoa(shared.PORT), grpc.WithInsecure())
+	conn, err := grpc.Dial(ipContainer + ":" + 
+		strconv.Itoa(shared.GRPC_PORT), grpc.WithInsecure())
 	shared.CheckError(err)
 
 	defer conn.Close()
@@ -32,6 +42,6 @@ func main() {
 
 		t2 := time.Now()
 		x := float64(t2.Sub(t1).Nanoseconds()) / 1000000
-		fmt.Printf("%f \n", x)
+		fmt.Println(x)
 	}
 }

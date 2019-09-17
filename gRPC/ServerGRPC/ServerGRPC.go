@@ -18,7 +18,7 @@ func (s *fibonacciServer) GetFibo(ctx context.Context, req *fibonacci.FibRequest
 }
 
 func main() {
-	conn, err := net.Listen("tcp", ":"+strconv.Itoa(shared.PORT))
+	conn, err := net.Listen("tcp", ":"+strconv.Itoa(shared.GRPC_PORT))
 	shared.CheckError(err)
 
 	servidor := grpc.NewServer()
