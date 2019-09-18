@@ -1,0 +1,21 @@
+version: "3" # To Deploy on swarm mode (See NOT SUPPORTED FOR DOCKER STACK DEPLOY)
+services:
+  rabbitmq:
+    image: rabbitmq:3.7
+  server:
+    image: perf-image:v2
+    command: bash -c "sleep 11s; ServerR $$IPRABBIT" # tempo pra iniciar o rabbit completamente
+    depends_on:
+      - rabbitmq
+    environment:
+      - IPRABBIT=rabbitmq # We got the ip like this
+  client:
+    image: perf-image:v2
+    volumes:
+      - /home/$USER/Output/rabbit_client:/go/src/app
+    command: bash -c "sleep 8s; ClientR $$IPRABBIT $$NUMBER >> log_client.csv" # tempo pra iniciar o rabbit completamente
+    depends_on:
+      - server
+    environment:
+      - IPRABBIT=rabbitmq # We got the ip like this
+      - NUMBER=5
